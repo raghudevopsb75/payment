@@ -1,0 +1,23 @@
+appName: payment
+appVersion: 2.0.1
+replicas: 2
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+initContainers:
+  enabled: true
+  imageVersion: 2.0.2
+  INPUT: "CART_HOST,prod.roboshop.payment.CART_HOST CART_PORT,prod.roboshop.payment.CART_PORT USER_HOST,prod.roboshop.payment.USER_HOST USER_PORT,prod.roboshop.payment.USER_PORT AMQP_HOST,prod.roboshop.payment.AMQP_HOST AMQP_USER,prod.roboshop.payment.AMQP_USER AMQP_PASS,prod.roboshop.payment.AMQP_PASS"
+
+job:
+  enabled: false
+
+resources:
+  requests:
+    memory: "1200Mi"
+    cpu: "500m"
+  limits:
+    memory: "1500Mi"
+    cpu: "800m"
